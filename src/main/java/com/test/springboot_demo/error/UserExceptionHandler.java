@@ -1,0 +1,22 @@
+package com.test.springboot_demo.error;
+
+import java.io.IOException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import javax.servlet.http.HttpServletResponse;
+
+
+@ControllerAdvice
+public class UserExceptionHandler extends ResponseEntityExceptionHandler {
+	 // Let Spring handle the exception, we just override the status code
+    @ExceptionHandler(UserNotFoundException.class)
+    public void springHandleNotFound(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.NOT_FOUND.value());
+    }
+
+
+}
